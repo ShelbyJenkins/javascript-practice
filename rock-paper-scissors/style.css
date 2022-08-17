@@ -1,0 +1,197 @@
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #3266CC;
+    position:fixed;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin: 0;
+}
+
+#main {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    position:fixed;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+}
+
+#post {
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    position:fixed;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+}
+
+#postComputer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 1 0;
+    background: #ffffff;
+    text-transform: uppercase;
+    border: 2vh solid #DE251E;
+    min-width: 0;
+}
+
+#postPlayer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 1 0;
+    background: #ffffff;
+    text-transform: uppercase;
+    border: 2vh solid #DE251E;
+    min-width: 0;
+}
+
+#postPlayer img {
+    max-width: 25vh;
+    max-height: 25vh;
+}
+#postPlayer h1 {
+    font-size: 500%;
+}
+#postComputer img {
+    max-width: 25vh;
+    max-height: 25vh;
+}
+#postComputer h1 {
+    font-size: 500%;
+}
+score-container {
+    
+    display: flex;
+    flex-direction: row;
+    min-height: 15vh;
+}
+.score {
+    background: #3266CC;
+    display: flex;
+    
+    flex-shrink: 1;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.score p {
+    border: .5vh solid #3266CC;
+    color: white;
+    font-size: 1.5em;
+    font-weight: 300;
+    text-transform: uppercase;
+    
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+    min-height: 0%;
+}
+
+button-container {
+    background: #DE251E;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-shrink: 1;
+    min-height: 25vh;
+}
+
+.button {
+    background: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-shrink: 1;
+    flex-grow: 1;
+    flex-basis: content;
+    align-items: center;
+    justify-content: center;
+}
+
+.button p {
+    font-size: 1.5em;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.button:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite; 
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.button:active {
+    background-color: #DE251E;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.blackout {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+    transition-property: opacity;
+    transition-duration: 2.5s;
+    opacity: 0.0;
+}
+
+.blackoutReverse {
+    animation: fadeInOpacity .5s;
+    animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes fadeInOpacity {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+#end {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    position:fixed;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+}
+
+#winnerMessage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 1 0;
+    text-transform: uppercase;
+    
+    min-width: 0;
+    font-size: 500%;
+}
