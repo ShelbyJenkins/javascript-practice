@@ -1,17 +1,41 @@
 score = [];
+var buttonStatus = false;
 
-// deploy buttons for main view
-const buttons = document.querySelectorAll('.button');
-buttons.forEach((button) => {
-    button.addEventListener('click', (b) => {
-    startRound(b.target.id);
-    });
-});
-startGame();
+
+// Buttons. This should be a few lines of code to assign function to buttons
+// However, in adding a debounce function to prevent multiple clicks I found an issue
+// The removeEventListener function ONLY accepts a name function WITHOUT params
+// So I had to call removeEventListener for each button and create a function for each button
+function buttonReset() {
+    var rock = document.getElementById('rock');
+    var paper = document.getElementById('paper');
+    var scissors = document.getElementById('scissors');
+    if (buttonStatus === false) {
+        rock.addEventListener('click', rockClick);
+        paper.addEventListener('click', paperClick);
+        scissors.addEventListener('click', scissorsClick);
+    };
+    if (buttonStatus === true) {
+        rock.removeEventListener('click', rockClick);
+        paper.removeEventListener('click', paperClick);
+        scissors.removeEventListener('click', scissorsClick);
+    };
+}
+
+function rockClick() {
+    startRound('rock');
+}
+function paperClick() {
+    startRound('paper');
+}
+function scissorsClick() {
+    startRound('scissors');
+}
 
 // sets up for a new game
 function startGame() {
-    document.body.removeEventListener('click', startGame);
+    // calling buttonReset() here disables buttons
+    buttonReset();
     // set round tracker to base settings
     score = [];
     for (var n = 5; n > 0; n--) {
@@ -28,8 +52,11 @@ function startGame() {
     document.getElementById('end').style.display = 'none';
 }
 
+
 // Calls functions, prints throws, and performs game logic. 
 function startRound(playerSelection) {
+    buttonStatus = true;
+    buttonReset();
     computerSelection = getComputerSelection();
     // reroll computer hand on tie
     while (computerSelection == playerSelection) {
@@ -155,6 +182,8 @@ function postRound(player, computer, winner, loser, winningHand)
             setTimeout( function() {
                 document.getElementById('main').style.display = 'flex';
                 document.getElementById('post').style.display = 'none';
+                // reenables buttons
+                buttonReset();
             }, 2500);
         }
     }, 2500);
@@ -210,3 +239,5 @@ function endGame(winner) {
     // wait for click to restart
     document.body.addEventListener('click', startGame);
 }
+
+startGame();
