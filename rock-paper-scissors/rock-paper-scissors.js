@@ -8,7 +8,7 @@ buttons.forEach((b) => {
         b.disabled = true;
         setTimeout( function() {
             b.disabled = false;
-        }, 2000);
+        }, 4000);
     });
 });
 

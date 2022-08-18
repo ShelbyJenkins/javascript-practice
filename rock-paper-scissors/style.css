@@ -6,7 +6,7 @@ body {
     bottom:0px;
     left:0px;
     right:0px;
-    margin: 0;
+    /* margin: 0; */
 }
 #main {
     display: none;
@@ -39,8 +39,10 @@ body {
     text-transform: uppercase;
     border: none;
 }
-button:hover, button:active, button:disabled {
+button {
     color: black;
+}
+button:hover, button:active, button:disabled {   
     animation: shake 0.5s;
     animation-iteration-count: infinite; 
 }
@@ -65,7 +67,7 @@ button:hover, button:active, button:disabled {
 .scoreContainer {
     display: flex;
     flex-direction: row;
-    min-height: 20vh;
+    min-height: 10vh;
 }
 .score {
     display: flex;
