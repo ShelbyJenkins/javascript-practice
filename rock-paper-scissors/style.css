@@ -65,12 +65,15 @@ button:hover, button:active, button:disabled {
     flex: 1 1 0;
     justify-content: center;
     align-items: center;
-    min-height: 65vh;
+    min-height: 60vh;
     min-width: 0%;
 }
 
 .mainImage img {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     max-height: 100%;
 }
 
@@ -106,7 +109,7 @@ button:hover, button:active, button:disabled {
     bottom:0px;
     left:0px;
     right:0px;
-    font-size: min(18vw, 25vh);
+    font-size: min(15vw, 25vh);
     color: black;
 }
 
@@ -164,7 +167,11 @@ button:hover, button:active, button:disabled {
     align-items: center;
     flex: 1 1 0;
     text-transform: uppercase;
-    
     min-width: 0;
-    font-size: 500%;
+    font-size: 10vw;
+}
+
+#winnerMessage * {
+    justify-content: center;
+}
 }

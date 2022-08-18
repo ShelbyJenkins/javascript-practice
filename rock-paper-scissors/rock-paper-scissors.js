@@ -5,15 +5,19 @@ const buttons = document.querySelectorAll('button');
 buttons.forEach((b) => {
     b.addEventListener('click', function(){ 
         startRound(this.id);
-        b.disabled = true;
-        setTimeout( function() {
-            b.disabled = false;
-        }, 4000);
+        buttons.forEach((b) => {
+            b.disabled = true;
+            setTimeout( function() {
+                b.disabled = false;
+            }, 4000);
+        });
     });
 });
 
 // sets up for a new game
 function startGame() {
+    // Remove post round restart
+    document.body.removeEventListener('click', startGame);
     // set round tracker to base settings
     score = [];
     for (var n = 5; n > 0; n--) {
@@ -202,12 +206,13 @@ function endGame(winner) {
     document.getElementById('main').style.display = 'none';
     document.getElementById('end').style.display = 'flex';
     if (winner == 'You') {
-        document.getElementById('winnerMessage').style.background = '#DE251E';
-        document.getElementById('winnerMessage').style.border = '2vh solid #ffffff';
+        document.getElementById('end').style.background = '#3266CC';
+        document.getElementById('end').style.border = '2vh solid #ffffff';
+        document.getElementById('winnerMessage').style.color = '#ffffff';
         document.getElementById('winnerMessage').textContent = 'You win!';
     } else {
-        document.getElementById('winnerMessage').style.background = '#3266CC';
-        document.getElementById('winnerMessage').style.border = '2vh solid #DE251E';
+        document.getElementById('end').style.background = '#3266CC';
+        document.getElementById('end').style.border = '2vh solid #DE251E';
         document.getElementById('winnerMessage').style.color = '#ffffff';
         document.getElementById('winnerMessage').textContent = 'Computer wins!';
     }
