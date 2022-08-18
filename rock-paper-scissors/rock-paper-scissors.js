@@ -2,10 +2,10 @@ score = [];
 var buttonStatus = false;
 
 
-// Buttons. This should be a few lines of code to assign function to buttons
-// However, in adding a debounce function to prevent multiple clicks I found an issue
-// The removeEventListener function ONLY accepts a name function WITHOUT params
-// So I had to call removeEventListener for each button and create a function for each button
+// Buttons. This should be a few lines of code to assign function to buttons.
+// However, in adding a debounce function to prevent multiple clicks I found an issue:
+// The removeEventListener function ONLY accepts a named function WITHOUT params.
+// So I had to call removeEventListener for each button and create a named function for each button.
 function buttonReset() {
     var rock = document.getElementById('rock');
     var paper = document.getElementById('paper');
@@ -21,7 +21,6 @@ function buttonReset() {
         scissors.removeEventListener('click', scissorsClick);
     };
 }
-
 function rockClick() {
     startRound('rock');
 }
@@ -34,7 +33,7 @@ function scissorsClick() {
 
 // sets up for a new game
 function startGame() {
-    // calling buttonReset() here disables buttons
+    // calling buttonReset() here enables buttons
     buttonReset();
     // set round tracker to base settings
     score = [];
@@ -55,6 +54,7 @@ function startGame() {
 
 // Calls functions, prints throws, and performs game logic. 
 function startRound(playerSelection) {
+    // disables buttons
     buttonStatus = true;
     buttonReset();
     computerSelection = getComputerSelection();
