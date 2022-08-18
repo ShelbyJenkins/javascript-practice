@@ -26,6 +26,9 @@ body {
     bottom:0px;
     left:0px;
     right:0px;
+    height: 100vh;
+    height: -webkit-fill-available;
+    height: fill-available;
 }
 #buttonContainer {
     background: #DE251E;
