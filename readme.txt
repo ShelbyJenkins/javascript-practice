@@ -10,9 +10,10 @@ Load on black screen
     <p>Whooooooooooaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
     </div>
 Click to dismiss and enter
+slow load image of houston
+but make it so it can quickly be scrolled past
 
 find 8-bit gif for text bubble hello
-
 
 background: 8-bit animated image of dallas
 
