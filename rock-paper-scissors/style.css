@@ -1,12 +1,12 @@
 html {
-    height: 100%;
+    height: -webkit-fill-available;
 }
 
 body {
     font-family: "Roboto", sans-serif;
     background-color: #3266CC;
     position:fixed;
-    height: 100%;
+    height: -webkit-fill-available;
     top:0px;
     bottom:0px;
     left:0px;
