@@ -188,6 +188,7 @@ function updateImage(player, computer, winner) {
         postImages.append(p);
         addImage(player);
     }
+    // After images and '>' are laid out this attaches it below topText div.
     document.getElementById('topText').insertAdjacentElement('afterend', postImages);
     setTimeout( function() { 
         document.getElementById('postImages').remove();
