@@ -2,11 +2,11 @@ body {
     font-family: "Roboto", sans-serif;
     background-color: #3266CC;
     position:fixed;
+    height: 100%;
     top:0px;
     bottom:0px;
     left:0px;
     right:0px;
-    /* margin: 0; */
 }
 #main {
     display: none;
@@ -43,9 +43,11 @@ body {
 button {
     color: black;
 }
-button:hover, button:active, button:disabled {   
-    animation: shake 0.5s;
-    animation-iteration-count: infinite; 
+@media (hover: hover) and (pointer: fine) {
+    button:hover, button:active, button:disabled {   
+        animation: shake 0.5s;
+        animation-iteration-count: infinite; 
+    }
 }
 @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }

@@ -9,11 +9,7 @@ Project todo:
 Fix text and main image being squished on mobile scaling
 
 end screen: 
-    remove bottom text
     zoom in on image of rock if you lose
     paper if you win
 
-favicon
-
-make an index.html for repo
 figure out what site to host it on
