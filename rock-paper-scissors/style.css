@@ -162,7 +162,7 @@ button {
 #winnerMessage {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex: 1 1 0;
     text-transform: uppercase;
