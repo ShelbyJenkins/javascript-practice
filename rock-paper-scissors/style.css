@@ -15,7 +15,7 @@ html, body {
     right:0px;
 }
 #buttonContainer {
-    background: #white;
+    background: white;
     display: flex;
     flex: 1 1 0;
     flex-direction: row;
@@ -172,5 +172,4 @@ button {
 
 #winnerMessage * {
     justify-content: center;
-}
 }
