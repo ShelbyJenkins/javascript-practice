@@ -1,3 +1,9 @@
+
+
+document.querySelector('meta[name="viewport"]').setAttribute("height",  window.innerHeight + 'px');
+console.log(window.innerHeight + 'px');
+console.log(document.querySelector('meta[name="viewport"]').getAttribute("height"));
+
 score = [];
 
 // Creates buttons and disables after click to prevent multiple entries.

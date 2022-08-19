@@ -1,32 +1,18 @@
-html {
-    height: -webkit-fill-available;
-    height: fill-available;
-}
-
-body {
+html, body {
     font-family: "Roboto", sans-serif;
     background-color: #3266CC;
-    /* position:fixed; */
-    height: -webkit-fill-available;
-    height: fill-available;
-    /* top:0px;
-    bottom:0px;
-    left:0px;
-    right:0px; */
+    
 }
 #main {
     display: none;
     flex: 1 1 0;
     flex-direction: column;
     justify-content: space-between;
-    /* position:fixed;
+    position:fixed;
     top:0px;
     bottom:0px;
     left:0px;
-    right:0px; */
-    height: 100vh;
-    height: -webkit-fill-available;
-    height: fill-available;
+    right:0px;
 }
 #buttonContainer {
     background: #DE251E;
@@ -42,7 +28,7 @@ body {
     font-family: "Roboto", sans-serif;
     display: flex;
     flex: 1 1 0;
-    min-width: 33vw;
+    min-width: 30vw;
     align-items: center;
     justify-content: center;
     font-size: 6vw;
