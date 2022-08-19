@@ -15,7 +15,7 @@ html, body {
     right:0px;
 }
 #buttonContainer {
-    background: #DE251E;
+    background: #white;
     display: flex;
     flex: 1 1 0;
     flex-direction: row;
@@ -24,7 +24,7 @@ html, body {
     max-height: 29vh;
 }
 #buttonContainer button {
-    background: rgba(255, 255, 255, 1);
+    background: white;
     font-family: "Roboto", sans-serif;
     display: flex;
     flex: 1 1 0;
@@ -41,7 +41,10 @@ button {
 @media (hover: hover) and (pointer: fine) {
     button:hover, button:active, button:disabled {   
         animation: shake 0.5s;
-        animation-iteration-count: infinite; 
+        animation-iteration-count: infinite;
+    }
+    #buttonContainer:hover {
+        background: #DE251E;
     }
 }
 @keyframes shake {

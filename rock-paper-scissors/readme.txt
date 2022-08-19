@@ -6,8 +6,6 @@ https://shelbyjenkins.github.io/javascript-practice/rock-paper-scissors/rock-pap
 
 Project todo:
 
-Fix text and main image being squished on mobile scaling
-
 end screen: 
     zoom in on image of rock if you lose
     paper if you win
