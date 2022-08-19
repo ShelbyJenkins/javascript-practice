@@ -214,11 +214,19 @@ function endGame(winner) {
         document.getElementById('end').style.border = '2vh solid #ffffff';
         document.getElementById('winnerMessage').style.color = '#ffffff';
         document.getElementById('winnerMessage').textContent = 'You win!';
+        var image = document.createElement("img");
+        image.src = 'images/' + 'youwin' + '.png';
+        image.setAttribute('id','endImage');
+        document.getElementById('end').insertAdjacentElement('afterbegin', image);
     } else {
         document.getElementById('end').style.background = '#3266CC';
         document.getElementById('end').style.border = '2vh solid #DE251E';
         document.getElementById('winnerMessage').style.color = '#ffffff';
         document.getElementById('winnerMessage').textContent = 'Computer wins!';
+        var image = document.createElement("img");
+        image.src = 'images/' + 'youlose' + '.png';
+        image.setAttribute('id','endImage');
+        document.getElementById('end').insertAdjacentElement('afterbegin', image);
     }
     // wait for click to restart
     document.body.addEventListener('click', startGame);

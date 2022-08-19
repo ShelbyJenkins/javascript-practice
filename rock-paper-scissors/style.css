@@ -131,7 +131,6 @@ button {
     display: flex;
     max-height: 100%;
 }
-
 #end {
     display: flex;
     flex-direction: column;
@@ -142,6 +141,12 @@ button {
     bottom:0px;
     left:0px;
     right:0px;
+    overflow: hidden;
+}
+#end img {
+    flex: 1 1 auto;
+    align-self: center;
+    max-height: 60vh;
 }
 .blackout {
     animation: shake 0.5s;
@@ -171,5 +176,6 @@ button {
 }
 
 #winnerMessage * {
+    flex-direction: column;
     justify-content: center;
 }
