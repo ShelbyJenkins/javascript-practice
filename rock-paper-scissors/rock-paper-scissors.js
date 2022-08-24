@@ -1,8 +1,9 @@
-document.querySelector('meta[name="viewport"]').setAttribute("height",  window.innerHeight + 'px');
-console.log(window.innerHeight + 'px');
-console.log(document.querySelector('meta[name="viewport"]').getAttribute("height"));
+startGame();
 
-score = [];
+// Some fun tricks to make a single page app fit nicely on a mobile device.
+// Safari hides portions of the page underneath the navigation bars otherwise.
+document.querySelector('meta[name="viewport"]').setAttribute('height',  window.innerHeight + 'px');
+;
 
 // Creates buttons and disables after click to prevent multiple entries.
 const buttons = document.querySelectorAll('button');
@@ -18,18 +19,25 @@ buttons.forEach((b) => {
     });
 });
 
-// sets up for a new game
+// Sets up for a new game.
 function startGame() {
-    // Remove post round restart
+    // Removes EL as a debounce.
     document.body.removeEventListener('click', startGame);
-    // set round tracker to base settings
+    // Removes old winners screen.
+    var rE = document.getElementById('endImage');
+    if (rE != null) {
+        rE.remove();
+    }
+    // Set round tracker to base settings.
     score = [];
+    // Resets score board.
     for (var n = 5; n > 0; n--) {
         const update = document.getElementById('score' + n);
         update.textContent = n;
         update.style.color = 'white';
         update.style.backgroundColor = '#3266CC'
     };
+    // Fades in main page from end screen or fresh load.
     document.body.classList.add('blackoutReverse');
     setTimeout( function() {
         document.body.classList.remove('blackoutReverse');
@@ -38,63 +46,54 @@ function startGame() {
     document.getElementById('end').style.display = 'none';
 }
 
-
 // Calls functions, prints throws, and performs game logic. 
 function startRound(playerSelection) {
-    computerSelection = getComputerSelection();
-    // reroll computer hand on tie
+    // Get computer hand.
+    computerSelection = getcomputerSelection();
+    // Reroll computer hand on tie.
     while (computerSelection == playerSelection) {
-        computerSelection = getComputerSelection();
+        computerSelection = getcomputerSelection();
     }
     // Switch statements do not require default due to santizied inputs.
     switch (computerSelection) {
         case 'rock':
-            playSound('rock', '500');
             switch (playerSelection) {
                 case 'paper':
-                    playSound('paper', '0');
-                    playSound('paper-beats-rock', '2200');
-                    postRound(playerSelection, computerSelection, 'Player', 'Computer', 'paper');
+                    soundSelector(playerSelection, computerSelection, 'player');
+                    postRound(playerSelection, computerSelection, 'player', 'computer', 'paper');
                     score.push('0');
                     return;
                 case 'scissors':
-                    playSound('scissors', '0');
-                    playSound('rock-beats-scissors', '2200');
-                    postRound(playerSelection, computerSelection, 'Computer', 'Player', 'rock');
+                    soundSelector(playerSelection, computerSelection, 'computer');
+                    postRound(playerSelection, computerSelection, 'computer', 'player', 'rock');
                     score.push('1');
                     return;
             };
             return;
         case 'paper':
-            playSound('paper', '500');
             switch (playerSelection) {
                 case 'rock':
-                    playSound('rock', '0');
-                    playSound('paper-beats-rock', '2200');
-                    postRound(playerSelection, computerSelection, 'Computer', 'Player', 'paper');
+                    soundSelector(playerSelection, computerSelection, 'computer');
+                    postRound(playerSelection, computerSelection, 'computer', 'paper');
                     score.push('1');
                     return;
                 case 'scissors':
-                    playSound('scissors', '0');
-                    playSound('scissors-beats-paper', '1500');
-                    postRound(playerSelection, computerSelection, 'Player', 'Computer', 'scissors');
+                    soundSelector(playerSelection, computerSelection, 'player');
+                    postRound(playerSelection, computerSelection, 'player', 'scissors');
                     score.push('0');
                     return;
             };
             return;
         case 'scissors':
-            playSound('scissors', '500');
             switch (playerSelection) {
                 case 'rock':
-                    playSound('rock', '0');
-                    playSound('rock-beats-scissors', '2200');
-                    postRound(playerSelection, computerSelection, 'Player', 'Computer', 'rock');
+                    soundSelector(playerSelection, computerSelection, 'player');
+                    postRound(playerSelection, computerSelection, 'player', 'rock');
                     score.push('0');
                     return;
                 case 'paper':
-                    playSound('paper', '0');
-                    playSound('scissors-beats-paper', '1500');
-                    postRound(playerSelection, computerSelection, 'Computer', 'Player', 'scissors');
+                    soundSelector(playerSelection, computerSelection, 'computer');
+                    postRound(playerSelection, computerSelection, 'computer', 'scissors');
                     score.push('1');
                     return;
             };
@@ -102,7 +101,7 @@ function startRound(playerSelection) {
         };
 }
 // Generates random number between 0-2 and converts it to a string.
-function getComputerSelection() {
+function getcomputerSelection() {
     computerSelection = Math.floor(Math.random() * 3);
     switch (computerSelection) {
         case 0:
@@ -113,36 +112,49 @@ function getComputerSelection() {
             return 'scissors';
     }
 }
-// Because sound
+
+// Determines what sounds to play and when.
+function soundSelector(playerHand, computerHand, winner) {
+    playSound(playerHand, '0');
+    playSound(computerHand, '500');
+    if (winner == 'player') {
+        playSound(playerHand + '-beats-' + computerHand, '2200');
+    } else {
+        playSound(computerHand + '-beats-' + playerHand, '2200');
+    }
+}
+
+// Because we love sound.
 function playSound(roundSound, time) {
     var sound = new Audio('sounds/' + roundSound + '.mp3');
     setTimeout( function() {
-        sound.play();
+        sound.play(sound);
         setTimeout( function() {
             sound.pause();
         }, 2500);
     }, time);
 }
 
-// Sets post round screen and navigates to next round or end game
-function postRound(player, computer, winner, loser, winningHand)
+// Sets post round screen and navigates to next round or end game.
+function postRound(player, computer, winner, winningHand)
 {
-    // updates post round screen
+    // Updates post round screen.
     updateImage(player, computer, winner);
-    if (winner == 'Player') {
+    if (winner == 'player') {
         document.getElementById('topText').textContent = 'You';
         document.getElementById('bottomText').textContent = 'Win!';
         document.getElementById('post').style.borderColor = '#3266CC';
     } else {
-        document.getElementById('topText').textContent = 'Computer';
+        document.getElementById('topText').textContent = 'computer';
         document.getElementById('bottomText').textContent = 'Wins!';
         document.getElementById('post').style.borderColor = '#DE251E';
     }
+    // Updates scoreboard.
     setTimeout(() => { 
         const update = document.querySelectorAll('#score' + score.length);
         update.forEach((n) => {
             n.textContent = winningHand;
-            if (winner == 'Player') { 
+            if (winner == 'player') { 
                 n.style.backgroundColor = 'white';
                 n.style.color = 'black';
             } else {
@@ -151,17 +163,17 @@ function postRound(player, computer, winner, loser, winningHand)
             }   
         })
     }, 2000);
-    // adds transition effect between main screen and post round screen
+    // Transition effect between main screen and post round screen.
     document.body.classList.add('blackout');
     setTimeout( function() {
         document.body.classList.remove('blackout');
         document.getElementById('main').style.display = 'none';
         document.getElementById('post').style.display = 'flex';
-        // game logic. end game on winner or continue
+        // Checks if game is over and calls endGame function if true.
         if (score.filter(x => x == 0).length == 3) {
-            setTimeout(() => { endGame('You') }, 2500);
+            setTimeout(() => { endGame('you') }, 2500);
         } else if (score.filter(x => x == 1).length == 3) {
-            setTimeout(() => { endGame('Computer') }, 2500);
+            setTimeout(() => { endGame('computer') }, 2500);
         } else {
             setTimeout( function() {
                 document.getElementById('main').style.display = 'flex';
@@ -171,27 +183,27 @@ function postRound(player, computer, winner, loser, winningHand)
     }, 2500);
 }
 
-// dynamically inserts round hands into post round screen
+// Dynamically inserts round hands into post round screen.
 function updateImage(player, computer, winner) {
-    // create function to reduce repitition
     const postImages = document.createElement('div');
     postImages.setAttribute('id', 'postImages');
+    // Creates nested function to reduce repitition.
     function addImage(p) {
-        var image = document.createElement("img");
+        var image = document.createElement('img');
         image.src = 'images/' + p + '.png';
         postImages.append(image);
     }
-    if (winner == 'Player') {
+    if (winner == 'player') {
         addImage(player);
-        // have to append P tag to center with flexbox
+        // Have to append P tag to center with flexbox.
         // rather than just appending text!
-        let p = document.createElement("p")
+        let p = document.createElement('p')
         p.append('>')
         postImages.append(p);
         addImage(computer);
     } else {
         addImage(computer);
-        let p = document.createElement("p")
+        let p = document.createElement('p')
         p.append('>')
         postImages.append(p);
         addImage(player);
@@ -204,32 +216,27 @@ function updateImage(player, computer, winner) {
     }, 5000);
 }
 
-// sets up end game screen
+// Sets end game screen and primes for next game.
 function endGame(winner) {
     document.getElementById('post').style.display = 'none';
     document.getElementById('main').style.display = 'none';
     document.getElementById('end').style.display = 'flex';
-    if (winner == 'You') {
-        document.getElementById('end').style.background = '#3266CC';
+    document.getElementById('end').style.background = '#3266CC';
+    document.getElementById('winnerMessage').style.color = '#ffffff';
+    if (winner == 'you') {
         document.getElementById('end').style.border = '2vh solid #ffffff';
-        document.getElementById('winnerMessage').style.color = '#ffffff';
         document.getElementById('winnerMessage').textContent = 'You win!';
-        var image = document.createElement("img");
+        var image = document.createElement('img');
         image.src = 'images/' + 'youwin' + '.png';
-        image.setAttribute('id','endImage');
-        document.getElementById('end').insertAdjacentElement('afterbegin', image);
     } else {
-        document.getElementById('end').style.background = '#3266CC';
         document.getElementById('end').style.border = '2vh solid #DE251E';
-        document.getElementById('winnerMessage').style.color = '#ffffff';
-        document.getElementById('winnerMessage').textContent = 'Computer wins!';
-        var image = document.createElement("img");
+        document.getElementById('winnerMessage').textContent = 'computer wins!';
+        var image = document.createElement('img');
         image.src = 'images/' + 'youlose' + '.png';
-        image.setAttribute('id','endImage');
-        document.getElementById('end').insertAdjacentElement('afterbegin', image);
     }
-    // wait for click to restart
+    image.setAttribute('id','endImage');
+    document.getElementById('end').insertAdjacentElement('afterbegin', image);
+    // Wait for click to restart.
     document.body.addEventListener('click', startGame);
 }
 
-startGame();
